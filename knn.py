@@ -50,6 +50,7 @@ def main():
     classes_filename = sys.argv[2]
     test_filename = sys.argv[3]
     k = int(sys.argv[4])
+    output_filename = sys.argv[5]
 
     train = create_train(train_filename, classes_filename)
     test = rd.read_vectors(test_filename)
@@ -59,7 +60,7 @@ def main():
     for i in range(len(test)):
         chosen_classes.append(classify(train, test[i], k))
 
-    wt.write_results("results.txt", chosen_classes)
+    wt.write_results(output_filename, chosen_classes)
 
 if __name__ == '__main__':
     main()

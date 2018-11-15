@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 
+#Le vetores em formato csv, separados por ' '
 def read_vectors(file_name):
     with open(file_name, 'r') as csvfile:
         text = csv.reader(csvfile, delimiter=' ')
@@ -17,6 +18,7 @@ def read_vectors(file_name):
 
         return docs
 
+#Le as classes, separadas por quebra de linha
 def read_classes(file_name):
     file = open(file_name, 'r')
     text = file.readlines()

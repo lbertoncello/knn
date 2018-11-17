@@ -142,7 +142,7 @@ if __name__ == '__main__':
 	iris = datasets.load_iris()
 	wine = datasets.load_wine()
 	breast_cancer = datasets.load_breast_cancer()
-	resultados = np.empty([10,5])
+	resultados = np.empty([10,6])
 	nome_data = ''
 	saida = list()
 

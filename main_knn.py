@@ -142,12 +142,24 @@ if __name__ == '__main__':
 	iris = datasets.load_iris()
 	wine = datasets.load_wine()
 	breast_cancer = datasets.load_breast_cancer()
-	resultados = list()
+	resultados = np.empty([10,5])
+	nome_data = ''
+	saida = list()
 
 	for dataset in [iris,wine,breast_cancer]:
-
+		i = 0
 		data = dataset.data
 		target = dataset.target
+
+		if dataset == iris:
+			nome_data = 'iris'
+		else:
+			if dataset == wine:
+				nome_data = 'wine'
+			else:
+				nome_data = 'breast_cancer'
+
+		params = list()
 
 		skf = StratifiedKFold(n_splits=10)
 		skf.get_n_splits(data, target)
@@ -166,16 +178,16 @@ if __name__ == '__main__':
 		   y_pred = test(train_data,X_test,k,ponderado)
 
 		   scores = analyze(y_test,y_pred)
-		   #print(scores)
+		   resultados[i] = np.copy(scores)
+		   params.append((k,ponderado,z_score))
+		   i=i+1
+		   
+		intervalo_confianca = np.std(resultados,axis=0)*2
+		media = np.mean(resultados,axis=0)
+		saida.append((nome_data,params,media,intervalo_confianca))
 
-		   if dataset == iris:
-		   	print('iris')
-		   elif dataset == wine:
-		   	print('wine')
-		   elif dataset == breast_cancer:
-		   	print('breast_cancer')
-		   print('k: ',k,' ponderado: ',ponderado,' z_score: ',z_score)
-		   print("Accuracy: %0.2f (+/- %0.6f)" % (np.mean(scores), np.std(scores) * 2))
+
+	print(saida)
 
 
 

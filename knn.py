@@ -53,9 +53,9 @@ def classify(train, u, k, vote_type):
     train.sort(key=lambda x: x.getSimilarity())
     k_nearest_neighbors = train[:k]
 
-    if vote_type == 'po':
+    if vote_type == 'npo':
         return choose_class_by_simple_vote(k_nearest_neighbors)
-    elif vote_type == 'npo':
+    elif vote_type == 'po':
         return  choose_class_by_weighted_vote(k_nearest_neighbors)
 
 def calc_similarities(train, u):
